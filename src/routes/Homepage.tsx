@@ -2,10 +2,9 @@ import React from 'react'
 
 import { Link, Outlet } from 'react-router-dom'
 
-import level1 from '../img/level/level1.jpeg'
-import level2 from '../img/level/level2.jpeg'
-import level3 from '../img/level/level3.jpeg'
-
+import level1 from '../img/level/waldo-level-1.jpeg'
+import level2 from '../img/level/waldo-level-2.jpeg'
+import level3 from '../img/level/waldo-level-3.jpeg'
 import styled from 'styled-components'
 
 const ImgContainer = styled.div`
@@ -16,9 +15,9 @@ const ImgContainer = styled.div`
 
 const Homepage = () => {
   const level = [
-    { id: 'level1', url: level1 },
-    { id: 'level2', url: level2 },
-    { id: 'level3', url: level3 },
+    { id: 'waldo-level-1', url: level1 },
+    { id: 'waldo-level-2', url: level2 },
+    { id: 'waldo-level-3', url: level3 },
   ]
   return (
     <div>

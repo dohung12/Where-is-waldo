@@ -8,7 +8,12 @@ import Leaderboard from './routes/Leaderboard'
 import Error from './routes/Error'
 import GamePage from './routes/GamePage'
 
+import { initializeApp } from 'firebase/app'
+import { firebaseConfig } from './firebase-config'
+
 function App() {
+  initializeApp(firebaseConfig)
+
   return (
     <BrowserRouter>
       <Routes>

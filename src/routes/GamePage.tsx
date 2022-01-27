@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import Loading from './Loading'
+import { collection, getDocs, getFirestore } from 'firebase/firestore'
 
 import styled from 'styled-components'
-import { coord } from '../interface/interface'
+import { coord, charType } from '../interface/interface'
 
 const StyledDiv = styled.div`
   position: relative;
@@ -20,6 +20,9 @@ const DropdownElement = styled.div`
   position: absolute;
   width: 200px;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+
   button {
     background-color: transparent;
     border: 0;
@@ -28,10 +31,14 @@ const DropdownElement = styled.div`
 
 const GamePage = () => {
   const param = useParams()
-  const imgSrc = require(`../img/level/${param.id}.jpeg`)
+  const id = param.id
+  const imgSrc = require(`../img/level/${id}.jpeg`)
+
+  // set state
   const [clickCoord, setClickCoord] = useState<coord | null>(null)
   const [imgCoord, setImgCoord] = useState<coord | null>(null)
   const [dropdownCoord, setDropdownCoord] = useState<coord | null>(null)
+  const [charData, setCharData] = useState<charType[]>([])
 
   const handleImgClick = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>
@@ -46,11 +53,30 @@ const GamePage = () => {
     }
   }
 
+  const fetchData = async () => {
+    // get character data from firestore
+    const db = getFirestore()
+    if (id) {
+      const querySnapshot = await getDocs(collection(db, id))
+      const newCharData: charType[] = []
+      querySnapshot.forEach((doc) => {
+        console.log(doc.data())
+        const { x, y, name } = doc.data()
+        newCharData.push({ x, y, name, selected: false })
+      })
+
+      setCharData(newCharData)
+    }
+  }
+
   useEffect(() => {
     const data = document.querySelector('#img')?.getBoundingClientRect()
     if (data) {
       setImgCoord({ x: data.x, y: data.y })
     }
+
+    fetchData()
+    console.log(charData)
   }, [])
 
   return (
@@ -71,7 +97,13 @@ const GamePage = () => {
           <DropdownElement
             style={{ left: dropdownCoord.x, top: dropdownCoord.y }}
           >
-            <button>Hello</button>
+            {charData.map((char) => {
+              return (
+                <button key={char.name} value={char.name}>
+                  {char.name}
+                </button>
+              )
+            })}
           </DropdownElement>
         )}
       </div>
