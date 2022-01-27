@@ -22,10 +22,24 @@ const DropdownElement = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
 
   button {
+    &:hover {
+      background-color: #fef2f2;
+    }
+
     background-color: transparent;
     border: 0;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    gap: 16px;
+    img {
+      width: 25px;
+      object-fit: contain;
+    }
   }
 `
 
@@ -84,7 +98,7 @@ const GamePage = () => {
       <header>
         <Link to='/'>Back to homepage</Link>
       </header>
-      <div className='img-container'>
+      <div>
         <img
           id='img'
           src={imgSrc}
@@ -98,9 +112,11 @@ const GamePage = () => {
             style={{ left: dropdownCoord.x, top: dropdownCoord.y }}
           >
             {charData.map((char) => {
+              const imgSrc = require(`../img/icons/${char.name}.jpg`)
               return (
                 <button key={char.name} value={char.name}>
-                  {char.name}
+                  <img src={imgSrc} alt={char.name} />
+                  <p>{char.name}</p>
                 </button>
               )
             })}
