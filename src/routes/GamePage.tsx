@@ -6,6 +6,13 @@ import styled from 'styled-components'
 import { coord, charType } from '../interface/interface'
 
 const StyledDiv = styled.div`
+  header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
   position: relative;
   display: flex;
   align-items: center;
@@ -43,6 +50,16 @@ const DropdownElement = styled.div`
   }
 `
 
+const HeaderImgContainer = styled.div`
+  display: flex;
+
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+`
+
 const GamePage = () => {
   const param = useParams()
   const id = param.id
@@ -57,6 +74,7 @@ const GamePage = () => {
   const handleImgClick = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>
   ) => {
+    e.stopPropagation()
     if (imgCoord) {
       const x = e.pageX - imgCoord.x
       const y = e.pageY - imgCoord.y
@@ -83,6 +101,10 @@ const GamePage = () => {
     }
   }
 
+  const closeDropdown = () => {
+    setDropdownCoord(null)
+  }
+
   useEffect(() => {
     const data = document.querySelector('#img')?.getBoundingClientRect()
     if (data) {
@@ -94,8 +116,23 @@ const GamePage = () => {
   }, [])
 
   return (
-    <StyledDiv>
+    <StyledDiv
+      onClick={() => {
+        closeDropdown()
+      }}
+    >
       <header>
+        <HeaderImgContainer>
+          {charData.map((char) => {
+            const imgSrc = require(`../img/icons/${char.name}.jpg`)
+            return (
+              <div key={char.name}>
+                <img src={imgSrc} alt={char.name} />
+                <h5>{char.name}</h5>
+              </div>
+            )
+          })}
+        </HeaderImgContainer>
         <Link to='/'>Back to homepage</Link>
       </header>
       <div>
