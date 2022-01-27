@@ -1,7 +1,41 @@
 import React from 'react'
 
+import { Link, Outlet } from 'react-router-dom'
+
+import level1 from '../img/level/level1.jpeg'
+import level2 from '../img/level/level2.jpeg'
+import level3 from '../img/level/level3.jpeg'
+
+import styled from 'styled-components'
+
+const ImgContainer = styled.div`
+  img {
+    width: 300px;
+  }
+`
+
 const Homepage = () => {
-  return <div>hello from homepage</div>
+  const level = [
+    { id: 'level1', url: level1 },
+    { id: 'level2', url: level2 },
+    { id: 'level3', url: level3 },
+  ]
+  return (
+    <div>
+      <h1>Hello from Homepage</h1>
+      {level.map((level) => {
+        const { id, url } = level
+        return (
+          <Link to={`/main/${id}`} key={id}>
+            <ImgContainer>
+              <img src={url} alt={id} />
+              <h3>{id}</h3>
+            </ImgContainer>
+          </Link>
+        )
+      })}
+    </div>
+  )
 }
 
 export default Homepage
