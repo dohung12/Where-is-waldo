@@ -151,7 +151,6 @@ const GamePage = () => {
       // coord of mouse click relative to img position
       setClickCoord({ x, y })
       setDropdownCoord({ x: e.pageX, y: e.pageY })
-      console.log(x, y)
     }
   }
 
@@ -215,9 +214,8 @@ const GamePage = () => {
   useEffect(() => {
     const data = document.querySelector('#img')?.getBoundingClientRect()
     if (data) {
-      setImgCoord({ x: data.x, y: data.y })
+      setImgCoord({ x: window.scrollX + data.x, y: window.scrollY + data.y })
     }
-
     fetchData()
   }, [])
 
