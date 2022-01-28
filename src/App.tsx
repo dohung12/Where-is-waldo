@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import Homepage from './routes/Homepage'
 import Main from './routes/Main'
 import Leaderboard from './routes/Leaderboard'
@@ -15,7 +15,7 @@ function App() {
   initializeApp(firebaseConfig)
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path='/' element={<Homepage />}></Route>
         <Route path='/main' element={<Main />}>
@@ -24,7 +24,7 @@ function App() {
         <Route path='/leaderboard' element={<Leaderboard />}></Route>
         <Route path='*' element={<Error />}></Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
