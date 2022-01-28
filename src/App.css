@@ -52,3 +52,11 @@ small,
 .text_small {
   font-size: 0.8rem;
 }
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}

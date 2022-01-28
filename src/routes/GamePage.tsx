@@ -38,6 +38,8 @@ const DropdownElement = styled.div`
   flex-direction: column;
   border-radius: 10px;
   overflow: hidden;
+  gap: 12px;
+  padding: 12px;
 
   button {
     &:hover {
@@ -48,7 +50,6 @@ const DropdownElement = styled.div`
     border: 0;
     display: flex;
     align-items: center;
-    padding: 12px;
     gap: 16px;
     img {
       width: 25px;
@@ -59,6 +60,7 @@ const DropdownElement = styled.div`
 
 const HeaderImgContainer = styled.div`
   display: flex;
+  gap: 1rem;
 
   div {
     display: flex;
@@ -102,6 +104,23 @@ const DisplayWin = styled.div`
     color: #ef4444;
     font-size: 72px;
   }
+`
+
+const BackToHomePage = styled.button`
+    color: #ef4444;
+    background-color: transparent;
+    font-size: 1.25rem;
+    padding: 12px;
+    border: 3px solid;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+      color: white;
+      background-color:  #ef4444;
+    }
+}
 `
 
 const GamePage = () => {
@@ -215,7 +234,9 @@ const GamePage = () => {
             )
           })}
         </HeaderImgContainer>
-        <Link to='/'>Back to homepage</Link>
+        <Link to='/'>
+          <BackToHomePage>Back to homepage</BackToHomePage>
+        </Link>
       </header>
       <div>
         <img
@@ -237,9 +258,10 @@ const GamePage = () => {
                   key={char.name}
                   value={char.name}
                   onClick={() => handleSelectChar(char)}
+                  disabled={char.selected}
                 >
                   <img src={imgSrc} alt={char.name} />
-                  <p>{char.name}</p>
+                  <h5>{char.name}</h5>
                 </button>
               )
             })}
