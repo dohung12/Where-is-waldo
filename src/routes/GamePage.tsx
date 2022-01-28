@@ -18,6 +18,10 @@ const StyledDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
+    background-color: white;
+
+    position: sticky;
+    top: 0;
   }
 
   position: relative;
@@ -27,6 +31,7 @@ const StyledDiv = styled.div`
 
   img {
     width: 90vw;
+    cursor: pointer;
   }
 `
 
@@ -111,10 +116,11 @@ const BackToHomePage = styled.button`
     background-color: transparent;
     font-size: 1.25rem;
     padding: 12px;
-    border: 3px solid;
-    font-weight: 700;
+    border: 2px solid;
     border-radius: 10px;
     cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 
     &:hover {
       color: white;
@@ -235,7 +241,7 @@ const GamePage = () => {
           })}
         </HeaderImgContainer>
         <Link to='/'>
-          <BackToHomePage>Back to homepage</BackToHomePage>
+          <BackToHomePage>homepage</BackToHomePage>
         </Link>
       </header>
       <div>
